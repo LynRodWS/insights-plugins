@@ -26,4 +26,4 @@ COPY --from=builder /workspace/metrics-server .
 
 WORKDIR /opt/app
 
-CMD ["rbac-reporter"]
+CMD ["metrics-server"]
