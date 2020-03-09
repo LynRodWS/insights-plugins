@@ -13,7 +13,7 @@ RUN go mod download
 
 COPY pkg pkg
 # Build
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o rbac-reporter pkg/*.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o metrics-server pkg/*.go
 
 
 FROM alpine:3.11.3
@@ -22,8 +22,8 @@ RUN apk --no-cache add ca-certificates
 
 RUN addgroup -S insights && adduser -u 1200 -S insights -G insights
 USER 1200
-COPY --from=builder /workspace/rbac-reporter .
+COPY --from=builder /workspace/metrics-server
 
 WORKDIR /opt/app
 
-CMD ["rbac-reporter"]
+CMD ["metrics-server"]
