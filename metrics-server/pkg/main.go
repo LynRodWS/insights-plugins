@@ -13,8 +13,9 @@ import (
 )
 
 const refreshInterval = 1 * time.Hour
-const metricURL = fmt.Sprintf("https://%s/v0/organizations/%s/clusters/%s/data/metrics", os.Getenv("FAIRWINDS_INSIGHTS_HOST"), os.Getenv("FAIRWINDS_ORG"), os.Getenv("FAIRWINDS_CLUSTER"))
-const authToken = os.Getenv("FAIRWINDS_TOKEN")
+
+var metricURL = fmt.Sprintf("https://%s/v0/organizations/%s/clusters/%s/data/metrics", os.Getenv("FAIRWINDS_INSIGHTS_HOST"), os.Getenv("FAIRWINDS_ORG"), os.Getenv("FAIRWINDS_CLUSTER"))
+var authToken = os.Getenv("FAIRWINDS_TOKEN")
 
 func refreshData() {
 	actionItems.Reset()
