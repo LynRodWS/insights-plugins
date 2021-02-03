@@ -135,9 +135,13 @@ func GetImagesFromManifest(configFolder string) ([]trivymodels.Image, []models.R
 }
 
 func processYamlNode(yamlNode map[string]interface{}) ([]trivymodels.Image, []models.Container) {
+	metadata := yamlNode["metadata"].(map[string]interface{})
 	owner := trivymodels.Resource{
 		Kind: yamlNode["kind"].(string),
-		Name: yamlNode["metadata"].(map[string]interface{})["name"].(string),
+		Name: metadata["name"].(string),
+	}
+	if namespace, ok := metadata["namespace"]; ok {
+		owner.Namespace = namespace.(string)
 	}
 	podSpec := GetPodSpec(yamlNode)
 	images := getImages(podSpec.(map[string]interface{}))
