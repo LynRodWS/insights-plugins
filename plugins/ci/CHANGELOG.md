@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2
+
+* Fix bug in Trivy to allow namespace to be sent up.
+
 ## 0.8.1
 
 * Dedupe Trivy scans
